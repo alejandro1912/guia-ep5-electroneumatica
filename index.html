@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6fbf8">
+  <meta name="description" content="Guía interactiva paso a paso para resolver la Evaluación Parcial 5 de Sistemas Electroneumáticos Industriales en FluidSIM.">
+  <title>Guía EP5 · Sistema electroneumático de corte</title>
+  <style>
+    :root{--ink:#17211d;--muted:#5b6b63;--bg:#f6fbf8;--paper:#fff;--line:#dce9e1;--green:#087a52;--green2:#18a875;--pale:#e5f5ec;--amber:#9d5d00;--amber-bg:#fff4dc;--red:#a73939;--red-bg:#fff0ee;--shadow:0 18px 55px rgba(18,66,44,.08);--radius:22px;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}button{font:inherit}.shell{max-width:1180px;margin:auto;padding:0 28px}.topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.top-inner{height:66px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:700;letter-spacing:-.3px}.brandmark{width:34px;height:34px;border-radius:11px;background:var(--green);color:white;display:grid;place-items:center;font:700 13px var(--mono)}.nav{display:flex;gap:20px;align-items:center}.nav a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:600}.nav a:hover{color:var(--green)}.top-actions{display:flex;gap:8px;align-items:center}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 14px;text-decoration:none;cursor:pointer;font-size:13px;font-weight:650;display:inline-flex;align-items:center;justify-content:center;gap:7px}.btn:hover{border-color:#9acbb2;background:#fafffc}.btn.primary{background:var(--ink);border-color:var(--ink);color:white}.btn.primary:hover{background:#2b3d34}.btn.small{padding:6px 11px}.hero{padding:62px 0 35px;background:radial-gradient(ellipse at 65% 0%,#dbf6e8 0,rgba(219,246,232,.32) 30%,transparent 70%)}.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #cae7d5;border-radius:999px;background:rgba(255,255,255,.74);padding:5px 11px;color:var(--green);font:600 11px var(--mono);letter-spacing:.04em;text-transform:uppercase}.dot{width:7px;height:7px;border-radius:50%;background:#27b77e}.hero h1{font-size:clamp(36px,6vw,62px);line-height:1.08;letter-spacing:-.055em;max-width:830px;margin:19px 0 15px}.hero p{max-width:700px;color:var(--muted);font-size:18px;margin:0 0 24px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:36px}.fact{background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:17px;padding:15px 17px}.fact b{display:block;font:700 12px var(--mono);letter-spacing:.02em;color:var(--green);margin-bottom:4px}.fact span{font-size:14px;color:var(--muted)}
+    .layout{display:grid;grid-template-columns:235px minmax(0,1fr);gap:38px;padding:28px 0 70px;align-items:start}.side{position:sticky;top:88px}.sidebox{border:1px solid var(--line);background:var(--paper);border-radius:18px;padding:15px;box-shadow:0 3px 12px rgba(18,66,44,.025)}.side-title{font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#829087;margin:3px 8px 11px}.side a{display:block;text-decoration:none;padding:7px 9px;border-radius:9px;color:var(--muted);font-size:13px;font-weight:550}.side a:hover,.side a.active{background:var(--pale);color:var(--green)}.progressbox{border:1px solid var(--line);background:white;border-radius:16px;padding:14px;margin-top:12px}.progress-head{display:flex;justify-content:space-between;font-size:12px;font-weight:650}.progress-head span:last-child{color:var(--green)}.track{height:7px;border-radius:8px;background:#edf3ef;margin-top:9px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#159669,#61ca95);width:0%;transition:width .25s}
+    main{min-width:0}.section{margin:0 0 27px;scroll-margin-top:85px}.section-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:15px}.num{flex:none;width:35px;height:35px;border-radius:12px;background:var(--pale);color:var(--green);display:grid;place-items:center;font:700 13px var(--mono)}h2{margin:0;font-size:25px;line-height:1.2;letter-spacing:-.035em}h3{font-size:17px;line-height:1.3;margin:0 0 8px;letter-spacing:-.02em}.lead{margin:5px 0 0;color:var(--muted);font-size:14px}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:23px;box-shadow:0 3px 14px rgba(18,66,44,.025)}.card p:first-child{margin-top:0}.card p:last-child{margin-bottom:0}.callout{border:1px solid #d5eade;border-left:4px solid var(--green2);background:#f5fcf7;border-radius:13px;padding:13px 15px;margin:15px 0;color:#344b3e;font-size:14px}.callout.warn{border-color:#f2dfa9;border-left-color:#d89626;background:var(--amber-bg);color:#704900}.callout.caution{border-color:#efcfca;border-left-color:#c2544d;background:var(--red-bg);color:#743430}.checklist{list-style:none;margin:0;padding:0;display:grid;gap:8px}.checklist li{margin:0}.check{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;background:#fbfdfb;border:1px solid #edf2ee;border-radius:12px;cursor:pointer}.check:hover{border-color:#b9dfc9}.check input{accent-color:var(--green);width:17px;height:17px;margin:3px 0 0;flex:none}.check span{font-size:14px}.check input:checked+span{text-decoration:line-through;color:#829087}.stepgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stepcard{border:1px solid var(--line);border-radius:16px;padding:17px;background:white}.stepcard .tag{font:600 10px var(--mono);color:var(--green);text-transform:uppercase;letter-spacing:.08em}.stepcard p{font-size:14px;color:var(--muted);margin:6px 0 0}.stepcard ul{padding-left:19px;margin:9px 0 0;font-size:13px;color:var(--muted)}.stepcard li{padding:2px 0}.code{font:13px/1.6 var(--mono);background:#f3f7f4;border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow:auto;color:#294b39}.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}.pill{display:inline-block;padding:3px 9px;border-radius:999px;background:#edf7f1;color:var(--green);font:600 11px var(--mono)}
+    .diagram{background:#fbfdfb;border:1px solid var(--line);border-radius:18px;padding:14px;overflow:hidden}.diagram svg{width:100%;height:auto;display:block;min-height:130px}.wire{stroke:#60736a;stroke-width:2.3;fill:none;stroke-linecap:round;stroke-linejoin:round}.symbol{stroke:#244b38;stroke-width:2.2;fill:#fff}.air{stroke:#31966c;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}.diagram text{font:12px var(--mono);fill:#35483e}.diagram .label{font-weight:700;fill:#087a52}.diagram-caption{font-size:12px;color:var(--muted);margin:10px 5px 0}.sim{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:14px}.sim-panel,.sim-state{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px}.sim-panel p,.sim-state p{margin:5px 0;color:var(--muted);font-size:13px}.pushrow{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.push{min-width:105px;min-height:64px;border:1px solid #b7c9bf;border-radius:13px;background:#f5faf7;color:var(--ink);font-weight:700;cursor:pointer;user-select:none;touch-action:none}.push:hover{border-color:var(--green2)}.push.pressed{background:#d9f4e5;border-color:var(--green);box-shadow:inset 0 0 0 2px #b2e3c8;color:var(--green)}.return-btn{border-style:dashed}.lamp{width:13px;height:13px;border-radius:50%;display:inline-block;background:#cbd6cf;vertical-align:-2px;margin-right:6px}.lamp.on{background:#23b476;box-shadow:0 0 0 5px #e1f7eb}.cyl{height:42px;border:2px solid #8ea49a;border-radius:7px;position:relative;background:#f6faf7;margin:17px 0 8px;overflow:hidden}.piston{position:absolute;top:5px;left:7px;height:28px;width:48%;background:linear-gradient(90deg,#31966c,#78c99c);border-radius:4px;transition:width .4s ease}.cyl.extended .piston{width:88%}.cyl:after{content:"1A · carrera";position:absolute;right:9px;top:8px;font:10px var(--mono);color:#66776e}.status{font-weight:700!important;color:var(--green)!important}.rubric-wrap{overflow-x:auto}.rubric{width:100%;border-collapse:collapse;min-width:620px;font-size:13px}.rubric th,.rubric td{padding:12px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.rubric th{font-size:11px;color:#64756b;background:#f6faf7}.rubric td:last-child,.rubric th:last-child{text-align:right;white-space:nowrap;font-weight:700}.rubric tr:last-child td{border-bottom:0}.weight{color:var(--green);font-family:var(--mono)}.question{border-top:1px solid var(--line);padding:12px 0}.question:first-of-type{border-top:0}.question summary{font-weight:650;cursor:pointer}.question p{font-size:14px;color:var(--muted);margin:8px 0 0}.footer{border-top:1px solid var(--line);padding:24px 0 38px;color:var(--muted);font-size:12px}.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.mobile-menu{display:none}
+    @media(max-width:850px){.layout{grid-template-columns:1fr;gap:17px}.side{position:static}.sidebox{display:flex;gap:7px;overflow-x:auto;padding:8px}.side-title{display:none}.side a{white-space:nowrap;flex:none}.progressbox{margin-top:8px}.nav{display:none}.mobile-menu{display:inline-flex}.stepgrid{grid-template-columns:1fr 1fr}}
+    @media(max-width:600px){.shell{padding:0 16px}.top-inner{height:59px}.brand{font-size:14px}.top-actions .print{display:none}.hero{padding:42px 0 24px}.hero p{font-size:16px}.facts{grid-template-columns:1fr;gap:8px;margin-top:24px}.fact{padding:11px 14px}.layout{padding-top:18px}.card{padding:17px;border-radius:18px}.section-head{gap:10px}h2{font-size:22px}.stepgrid,.twocol,.sim{grid-template-columns:1fr}.stepcard{padding:14px}.sim-state{order:-1}.rubric{min-width:590px}}
+    @media print{body{background:white}.topbar,.side,.hero-actions,.top-actions,.pushrow,.footer .print-hide{display:none!important}.shell{max-width:none;padding:0}.hero{padding:20px 0}.layout{display:block;padding:0}.card,.fact,.stepcard{box-shadow:none;break-inside:avoid}.section{break-inside:avoid}.progressbox{display:none}.hero h1{font-size:34px}.section{margin-bottom:14px}.btn{display:none}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell top-inner">
+      <a class="brand" href="#inicio"><span class="brandmark">EP5</span><span>Guía de ejecución práctica</span></a>
+      <nav class="nav" aria-label="Navegación principal"><a href="#prepara">Preparación</a><a href="#circuito">Circuito</a><a href="#pruebas">Pruebas</a><a href="#rubrica">Rúbrica</a></nav>
+      <div class="top-actions"><button class="btn small print" onclick="window.print()" aria-label="Imprimir guía o guardar como PDF">Imprimir / PDF</button><a class="btn primary small" href="#pasos">Empezar guía <span aria-hidden="true">→</span></a></div>
+    </div>
+  </header>
+  <div id="inicio" class="shell">
+    <section class="hero">
+      <span class="eyebrow"><i class="dot"></i> PAI1104 · FluidSIM · Evaluación práctica</span>
+      <h1>Resuelve la guía del sistema electroneumático de corte</h1>
+      <p>Una ruta paso a paso para diseñar, cablear y validar el accionamiento del cilindro de doble efecto <strong>1A</strong> con una válvula 5/2 biestable y una condición AND de dos pulsadores.</p>
+      <div class="hero-actions"><a href="#pasos" class="btn primary">Ir al paso a paso <span aria-hidden="true">↓</span></a><a href="#simulador" class="btn">Probar la lógica AND</a></div>
+      <div class="facts" aria-label="Datos de la evaluación">
+        <div class="fact"><b>TIEMPO INDICADO</b><span>80 minutos · 2 horas pedagógicas</span></div>
+        <div class="fact"><b>TRABAJO</b><span>Grupal, en laboratorio de automatización</span></div>
+        <div class="fact"><b>ENTREGA</b><span>Archivo FluidSIM: Apellido_Nombre_EVA5.fsm</span></div>
+      </div>
+    </section>
+    <div class="layout">
+      <aside class="side" aria-label="Contenido de la guía">
+        <div class="sidebox">
+          <div class="side-title">En esta guía</div>
+          <a href="#prepara">Antes de empezar</a><a href="#funcionamiento">1 · Analiza</a><a href="#circuito">2 · Diseña</a><a href="#pasos">3 · Implementa</a><a href="#simulador">4 · Comprueba AND</a><a href="#pruebas">5 · Valida</a><a href="#entrega">6 · Entrega y explica</a><a href="#rubrica">Rúbrica · 100%</a>
+        </div>
+        <div class="progressbox"><div class="progress-head"><span>Tu avance</span><span id="progressText">0 / 10</span></div><div class="track"><div class="fill" id="progressFill"></div></div></div>
+      </aside>
+      <main>
+        <section id="prepara" class="section">
+          <div class="section-head"><span class="num">00</span><div><h2>Prepara el trabajo</h2><p class="lead">Reúne lo necesario y aclara el objetivo antes de abrir FluidSIM.</p></div></div>
+          <div class="card">
+            <ul class="checklist">
+              <li><label class="check"><input type="checkbox" data-id="c1"><span>Abre FluidSIM y crea un documento nuevo para el circuito electroneumático.</span></label></li>
+              <li><label class="check"><input type="checkbox" data-id="c2"><span>Ubica los símbolos neumáticos y eléctricos normalizados disponibles en la biblioteca.</span></label></li>
+              <li><label class="check"><input type="checkbox" data-id="c3"><span>Acuerda con tu grupo la nomenclatura, por ejemplo: 1A (cilindro), 1V1 (válvula), S1/S2 (pulsadores), K1 (relé), Y1/Y2 (solenoides).</span></label></li>
+            </ul>
+            <div class="callout"><strong>Objetivo:</strong> el cilindro de corte solo debe avanzar cuando S1 y S2 estén accionados a la vez. Después se debe poder validar el retorno y la secuencia completa.</div>
+          </div>
+        </section>
+        <section id="funcionamiento" class="section">
+          <div class="section-head"><span class="num">01</span><div><h2>Analiza la secuencia</h2><p class="lead">Dibuja primero qué debe hacer el sistema; luego eliges los componentes.</p></div></div>
+          <div class="card">
+            <div class="stepgrid">
+              <article class="stepcard"><span class="tag">Condición de avance</span><h3>Dos órdenes simultáneas</h3><p>S1 y S2 son pulsadores normalmente abiertos. La señal de mando llega a K1 solo mientras ambos están presionados.</p></article>
+              <article class="stepcard"><span class="tag">Acción neumática</span><h3>Extender el cilindro 1A</h3><p>El contacto de K1 energiza Y1 de la 5/2 biestable; el carrete conmuta y alimenta una cámara del cilindro.</p></article>
+              <article class="stepcard"><span class="tag">Retorno</span><h3>Conmutar a Y2</h3><p>La segunda bobina Y2 conmuta la válvula al sentido opuesto y el cilindro retrocede. Define el mando de retorno según el esquema solicitado por tu docente.</p></article>
+              <article class="stepcard"><span class="tag">Validación</span><h3>Observar el ciclo completo</h3><p>Comprueba la extensión, el retorno y que una sola orden de seguridad nunca produzca el avance.</p></article>
+            </div>
+            <div class="callout warn"><strong>Importante:</strong> una AND con dos pulsadores en serie comprueba que ambos estén cerrados a la vez. No equivale a un sistema de mando bimanual certificado ni sustituye las protecciones reales de una máquina.</div>
+          </div>
+        </section>
+        <section id="circuito" class="section">
+          <div class="section-head"><span class="num">02</span><div><h2>Diseña los dos circuitos</h2><p class="lead">Organiza el esquema en una parte neumática y otra eléctrica, y relaciónalas con las bobinas.</p></div></div>
+          <div class="card">
+            <div class="twocol">
+              <div><span class="pill">NEUMÁTICA</span><h3 style="margin-top:10px">Elementos y conexiones</h3><ul><li>Fuente de aire y unidad de mantenimiento / regulación disponible en el banco.</li><li>Cilindro de doble efecto 1A.</li><li>Válvula direccional 5/2 biestable de doble solenoide, identificada como 1V1.</li><li>Conecta las vías de trabajo A y B a las dos cámaras; lleva los escapes a las salidas correspondientes.</li><li>Revisa en el símbolo de FluidSIM qué bobina produce avance y cuál retorno: la orientación puede cambiar según cómo insertes la válvula.</li></ul></div>
+              <div><span class="pill">ELÉCTRICA</span><h3 style="margin-top:10px">Mando AND y retorno</h3><ul><li>Conecta S1 y S2 normalmente abiertos <strong>en serie</strong> para formar la condición AND.</li><li>Usa esa señal para excitar la bobina del relé K1.</li><li>Un contacto normalmente abierto de K1 comanda Y1 (avance).</li><li>Prepara un mando separado para Y2 (retorno), como un pulsador de retorno, según las instrucciones del docente.</li><li>Identifica alimentación, retorno y cada componente sin cruces confusos.</li></ul></div>
+            </div>
+            <div class="diagram" role="img" aria-label="Esquema didáctico resumido: dos pulsadores normalmente abiertos en serie accionan un relé y una bobina de avance, vinculada a una válvula 5/2 biestable y a un cilindro de doble efecto. Una segunda orden acciona el retorno.">
+              <svg viewBox="0 0 760 204" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <text x="18" y="22" class="label">MANDO ELÉCTRICO · AND</text>
+                <path class="wire" d="M40 68H115 M155 68H225 M265 68H345 M40 68V120H345V68 M345 68H425"/>
+                <path class="symbol" d="M115 52v32m40-32v32m70-32v32m40-32v32"/><text x="115" y="105">S1</text><text x="225" y="105">S2</text><text x="140" y="47">NO</text><text x="250" y="47">NO</text>
+                <rect class="symbol" x="425" y="48" width="76" height="40" rx="5"/><text x="448" y="73" class="label">K1</text><path class="wire" d="M501 68H557"/><circle cx="565" cy="68" r="6" fill="#198a5d"/><text x="548" y="105">Y1 · avance</text>
+                <text x="18" y="152" class="label">NEUMÁTICA · DOBLE EFECTO</text>
+                <path class="air" d="M58 178H190 M270 178H335 M405 178H470 M530 178H585"/>
+                <rect class="symbol" x="190" y="144" width="80" height="58"/><path class="air" d="M198 190l24-24m0 0h21m0 0v20m-45-36h24l24 20"/><text x="205" y="139">1V1 · 5/2</text><text x="198" y="198">P</text><text x="247" y="198">T</text>
+                <path class="air" d="M270 159H335V148 M270 187H335V194"/><rect class="symbol" x="585" y="146" width="115" height="56" rx="4"/><path class="symbol" d="M647 146v56m0-28h45"/><text x="604" y="138" class="label">CILINDRO 1A</text><text x="342" y="144">A</text><text x="342" y="199">B</text><path class="wire" d="M445 92V126H500 M500 126h27"/><circle cx="531" cy="126" r="6" fill="#87998f"/><text x="456" y="119">Y2 · retorno</text>
+              </svg>
+              <p class="diagram-caption">Esquema conceptual, no plano de cableado. Sigue las conexiones, designaciones y orientación de los símbolos que exige tu docente y la biblioteca instalada.</p>
+            </div>
+            <div class="callout"><strong>Idea lógica:</strong> <code>S1 ∧ S2 → K1 → Y1</code>. La segunda bobina conmuta la 5/2 para retornar el cilindro. En una válvula biestable, el carrete conserva su última posición al retirar la señal eléctrica.</div>
+          </div>
+        </section>
+        <section id="pasos" class="section">
+          <div class="section-head"><span class="num">03</span><div><h2>Implementa en FluidSIM</h2><p class="lead">Construye por bloques, conecta cada circuito y etiqueta antes de simular.</p></div></div>
+          <div class="card">
+            <ol style="margin:0;padding-left:22px">
+              <li><strong>Inserta la parte neumática:</strong> unidad de alimentación, válvula 5/2 biestable y cilindro de doble efecto.</li>
+              <li><strong>Conecta las vías:</strong> alimentación a P; salidas de trabajo a las cámaras del cilindro; escapes a sus vías de escape. Confirma los números y flechas del símbolo elegido.</li>
+              <li><strong>Agrega el circuito eléctrico:</strong> fuente de control, S1 y S2 NO en serie, bobina del relé K1 y un contacto K1 para Y1.</li>
+              <li><strong>Agrega el retorno:</strong> conecta un pulsador de retorno a Y2, u otra secuencia solo si la pauta del docente lo indica.</li>
+              <li><strong>Vincula las bobinas:</strong> asocia Y1 y Y2 con los dos accionamientos eléctricos de 1V1 en FluidSIM.</li>
+              <li><strong>Ordena y rotula:</strong> separa visualmente mando y potencia neumática; nombra 1A, 1V1, S1, S2, K1, Y1 y Y2.</li>
+              <li><strong>Guarda una primera versión</strong> antes de ejecutar las pruebas.</li>
+            </ol>
+          </div>
+        </section>
+        <section id="simulador" class="section">
+          <div class="section-head"><span class="num">04</span><div><h2>Prueba la lógica AND</h2><p class="lead">Demostración en esta página: mantén pulsado cada botón con mouse o touch.</p></div></div>
+          <div class="card">
+            <div class="sim">
+              <div class="sim-panel"><h3>Tablero lógico didáctico</h3><p>Sostén S1 y S2 al mismo tiempo para activar la salida de avance. Usa “Retorno” para conmutar Y2.</p>
+                <div class="pushrow"><button class="push" id="s1" aria-pressed="false">S1<br><small>seguridad</small></button><button class="push" id="s2" aria-pressed="false">S2<br><small>seguridad</small></button><button class="push return-btn" id="retorno">Retorno<br><small>Y2</small></button></div>
+                <div class="cyl" id="cyl"><div class="piston"></div></div>
+                <p class="status" id="simMessage" aria-live="polite">Estado: cilindro retraído; esperando las dos señales.</p>
+              </div>
+              <div class="sim-state"><h3>Entradas y salida</h3><p><i class="lamp" id="lampS1"></i>S1 accionado</p><p><i class="lamp" id="lampS2"></i>S2 accionado</p><p><i class="lamp" id="lampY1"></i>Y1 avance</p><p><i class="lamp" id="lampY2"></i>Y2 retorno</p><div class="callout" style="font-size:12px;margin-bottom:0">Si solo se pulsa uno, la salida Y1 permanece apagada.</div></div>
+            </div>
+          </div>
+        </section>
+        <section id="pruebas" class="section">
+          <div class="section-head"><span class="num">05</span><div><h2>Ejecuta y registra las pruebas</h2><p class="lead">Marca cada verificación al reproducirla en FluidSIM, no solo en esta demo.</p></div></div>
+          <div class="card">
+            <ul class="checklist">
+              <li><label class="check"><input type="checkbox" data-id="c4"><span>Prueba S1 por sí solo: la salida Y1 no debe energizarse ni avanzar el cilindro.</span></label></li>
+              <li><label class="check"><input type="checkbox" data-id="c5"><span>Prueba S2 por sí solo: la salida Y1 no debe energizarse ni avanzar el cilindro.</span></label></li>
+              <li><label class="check"><input type="checkbox" data-id="c6"><span>Acciona S1 y S2 a la vez: K1 y Y1 deben actuar y el cilindro debe extenderse.</span></label></li>
+              <li><label class="check"><input type="checkbox" data-id="c7"><span>Libera los pulsadores y observa qué conserva la válvula biestable; no supongas que vuelve por resorte.</span></label></li>
+              <li><label class="check"><input type="checkbox" data-id="c8"><span>Acciona Y2 mediante el mando de retorno diseñado: el cilindro debe retraerse.</span></label></li>
+              <li><label class="check"><input type="checkbox" data-id="c9"><span>Repite el ciclo y comprueba secuencia, conexiones, nombres y ausencia de errores en FluidSIM.</span></label></li>
+              <li><label class="check"><input type="checkbox" data-id="c10"><span>Si trabajas con equipo físico, sigue el procedimiento de seguridad del laboratorio y verifica presión, fugas, reguladores y desplazamiento con supervisión.</span></label></li>
+            </ul>
+            <div class="callout warn"><strong>No inventes resultados:</strong> anota qué ocurrió en tu propia simulación. Si el cilindro avanza al activar un solo pulsador, revisa que S1 y S2 estén en serie, que sean NO y que el relé/control esté asociado correctamente.</div>
+          </div>
+        </section>
+        <section id="entrega" class="section">
+          <div class="section-head"><span class="num">06</span><div><h2>Guarda y prepara la explicación</h2><p class="lead">La entrega debe abrir, simularse y poder explicarse.</p></div></div>
+          <div class="card">
+            <div class="code">Apellido_Nombre_EVA5.fsm</div>
+            <ul><li>Guarda el archivo con el formato indicado y verifica que sea un archivo de FluidSIM.</li><li>Abre la versión guardada y ejecuta de nuevo una prueba de avance y retorno.</li><li>Presenta el circuito funcionando y explica el papel de la 5/2 biestable, el cilindro, S1/S2, K1, Y1 y Y2.</li><li>Justifica con la tabla de verdad por qué la salida solo se activa con las dos entradas.</li></ul>
+            <div class="code">S1 S2 → Y1<br>0&nbsp;&nbsp; 0&nbsp; → 0<br>0&nbsp;&nbsp; 1&nbsp; → 0<br>1&nbsp;&nbsp; 0&nbsp; → 0<br>1&nbsp;&nbsp; 1&nbsp; → 1</div>
+            <div class="callout caution"><strong>Alcance de la pauta:</strong> el PDF menciona tres preguntas de fundamentación, pero no incluye sus enunciados en el texto disponible. Confirma las preguntas exactas con tu docente; practica explicar el funcionamiento con tus propias palabras.</div>
+          </div>
+        </section>
+        <section id="rubrica" class="section">
+          <div class="section-head"><span class="num">100</span><div><h2>Rúbrica de evaluación</h2><p class="lead">Distribución de ponderaciones transcrita de la pauta entregada.</p></div></div>
+          <div class="card rubric-wrap"><table class="rubric"><thead><tr><th>Indicador</th><th>Qué debes demostrar para aspirar al nivel máximo</th><th>Ponderación</th></tr></thead><tbody>
+            <tr><td>1. Diseño del circuito neumático</td><td>Componentes requeridos, selección adecuada y conexiones correctas.</td><td class="weight">15%</td></tr>
+            <tr><td>2. Circuito eléctrico con lógica AND</td><td>Dos pulsadores de seguridad y elementos eléctricos que cumplen la condición solicitada.</td><td class="weight">20%</td></tr>
+            <tr><td>3. Integración electroneumática</td><td>Componentes eléctricos y neumáticos correctamente relacionados, con simbología y conexiones ordenadas.</td><td class="weight">20%</td></tr>
+            <tr><td>4. Funcionamiento del sistema de corte</td><td>Avance y retorno del cilindro según la lógica definida, sin fallos de operación.</td><td class="weight">20%</td></tr>
+            <tr><td>5. Pruebas funcionales y validación</td><td>Pruebas completas y verificación de la secuencia y operación.</td><td class="weight">15%</td></tr>
+            <tr><td>6. Preguntas y fundamentación</td><td>Responder tres preguntas con terminología técnica y justificar claramente el funcionamiento.</td><td class="weight">10%</td></tr>
+            <tr><td colspan="2"><strong>Total</strong></td><td class="weight">100%</td></tr>
+          </tbody></table></div>
+        </section>
+        <section class="section">
+          <div class="section-head"><span class="num">?</span><div><h2>Referencias rápidas</h2><p class="lead">Aclara dudas habituales antes de entregar.</p></div></div>
+          <div class="card">
+            <details class="question"><summary>¿Por qué S1 y S2 van en serie?</summary><p>En un circuito de contactos normalmente abiertos en serie, la corriente de mando solo puede llegar a K1 cuando los dos contactos están cerrados al mismo tiempo: es la condición lógica AND.</p></details>
+            <details class="question"><summary>¿Por qué la válvula es biestable?</summary><p>Tiene dos posiciones estables y dos solenoides. Una señal conmuta hacia una posición; la señal de la otra bobina conmuta hacia la opuesta. Verifica en FluidSIM la asociación de cada solenoide con el movimiento deseado.</p></details>
+            <details class="question"><summary>¿Qué hago si mi retorno no aparece en el esquema modelo?</summary><p>La pauta pide comprobar el retorno, pero el texto no fija un mando de retorno único. Usa la solución que indique el docente; la propuesta de esta guía sirve para organizar la prueba, no para reemplazar una instrucción específica.</p></details>
+          </div>
+        </section>
+      </main>
+    </div>
+    <footer class="footer"><div class="footer-row"><span>Guía de apoyo basada en “Evaluación Parcial 5 · Instrucciones y pauta de evaluación · Estudiante”, PAI1104.</span><span>Verifica siempre las indicaciones de tu docente y las normas del laboratorio.</span></div></footer>
+  </div>
+  <script>
+    (()=>{
+      const boxes=[...document.querySelectorAll('input[type="checkbox"][data-id]')];
+      const fill=document.getElementById('progressFill'),text=document.getElementById('progressText');
+      boxes.forEach(box=>{box.checked=localStorage.getItem('ep5-'+box.dataset.id)==='1';box.addEventListener('change',()=>{localStorage.setItem('ep5-'+box.dataset.id,box.checked?'1':'0');update()})});
+      function update(){const done=boxes.filter(x=>x.checked).length;text.textContent=`${done} / ${boxes.length}`;fill.style.width=`${boxes.length?done/boxes.length*100:0}%`}
+      update();
+      const pressed={s1:false,s2:false},buttons={s1:document.getElementById('s1'),s2:document.getElementById('s2')};
+      const lamps={s1:document.getElementById('lampS1'),s2:document.getElementById('lampS2'),y1:document.getElementById('lampY1'),y2:document.getElementById('lampY2')};
+      let extended=false;const cyl=document.getElementById('cyl'),msg=document.getElementById('simMessage');
+      function paint(){const and=pressed.s1&&pressed.s2;lamps.s1.classList.toggle('on',pressed.s1);lamps.s2.classList.toggle('on',pressed.s2);lamps.y1.classList.toggle('on',and);cyl.classList.toggle('extended',extended);if(and){extended=true;cyl.classList.add('extended');msg.textContent='Estado: S1 ∧ S2 = 1; Y1 activa, cilindro extendido.'}else if(extended){msg.textContent='Estado: válvula biestable conserva la última posición; cilindro extendido.'}else{msg.textContent='Estado: cilindro retraído; esperando las dos señales.'}}
+      for(const [key,button] of Object.entries(buttons)){
+        const down=e=>{e.preventDefault();pressed[key]=true;button.classList.add('pressed');button.setAttribute('aria-pressed','true');try{button.setPointerCapture(e.pointerId)}catch{}paint()};
+        const up=()=>{pressed[key]=false;button.classList.remove('pressed');button.setAttribute('aria-pressed','false');paint()};
+        button.addEventListener('pointerdown',down);button.addEventListener('pointerup',up);button.addEventListener('pointercancel',up);button.addEventListener('lostpointercapture',up);button.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat){e.preventDefault();pressed[key]=true;button.classList.add('pressed');button.setAttribute('aria-pressed','true');paint()}});button.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter'){pressed[key]=false;button.classList.remove('pressed');button.setAttribute('aria-pressed','false');paint()}});button.addEventListener('blur',up);
+      }
+      document.getElementById('retorno').addEventListener('click',()=>{if(extended){extended=false;lamps.y2.classList.add('on');msg.textContent='Estado: Y2 conmuta la válvula; cilindro retraído.';cyl.classList.remove('extended');setTimeout(()=>lamps.y2.classList.remove('on'),850)}else{lamps.y2.classList.add('on');msg.textContent='Estado: Y2 activada; el cilindro ya está retraído.';setTimeout(()=>lamps.y2.classList.remove('on'),850)}});
+      const links=[...document.querySelectorAll('.side a')];const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.hash==='#'+e.target.id))}}),{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('main .section[id]').forEach(s=>observer.observe(s));
+    })();
+  </script>
+</body>
+</html>
